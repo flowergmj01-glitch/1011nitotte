@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>N3・N4文法特訓</title>
+<style>
+    :root {
+        --bg-purple: linear-gradient(135deg, #E0BBE4, #F2E3F7);
+        --bg-pink: linear-gradient(135deg, #FFD1DC, #FFF0F5);
+        --bg-mint: linear-gradient(135deg, #B5EAD7, #E0F5EC);
+        --bg-yellow: linear-gradient(135deg, #FFFFB5, #FFFFE0);
+        --bg-blue: linear-gradient(135deg, #C7CEEA, #E8EAF6);
+        --text-main: #5C4B51;
+        --accent: #957DAD;
+        --box-bg: rgba(255, 255, 255, 0.95);
+        --correct: #B5EAD7;
+        --wrong: #FFD1DC;
+    }
+    
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    
+    body, html {
+        margin: 0;
+        padding: 0;
+        font-family: 'Hiragino Maru Gothic ProN', 'Rounded M+ 1c', 'Quicksand', sans-serif;
+        color: var(--text-main);
+        height: 100vh;
+        overflow-y: scroll;
+        scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    
+    ruby { ruby-position: over; font-weight: bold; }
+    rt { font-size: 0.6em; color: #888; font-weight: normal; }
+    
+    .page {
+        height: 100vh;
+        width: 100vw;
+        scroll-snap-align: start;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+    
+    .card {
+        background: var(--box-bg);
+        padding: 35px 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(149, 125, 173, 0.15);
+        max-width: 800px;
+        width: 100%;
+        text-align: left;
+        backdrop-filter: blur(8px);
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .text-center { text-align: center; }
+    h1 { color: var(--accent); font-size: 2.2rem; margin-bottom: 10px; text-align: center; letter-spacing: 2px;}
+    h2 { color: var(--accent); font-size: 1.6rem; border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-top: 5px; margin-bottom: 20px; display: inline-block;}
+    h3 { color: #5C4B51; font-size: 1.2rem; margin-top: 15px; margin-bottom: 8px; border-left: 4px solid var(--accent); padding-left: 10px;}
+    p { font-size: 1.1rem; line-height: 1.7; margin: 10px 0;}
+    
+    .q-container { background: #fff; padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #eee;}
+    .question { font-size: 1.2rem; font-weight: bold; margin-bottom: 15px; color: #333; line-height: 1.6;}
+    
+    .action-btn { background: var(--accent); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 1.1rem; cursor: pointer; margin-top: 10px; transition: 0.3s; font-weight: bold; width: 100%;}
+    .action-btn:hover { background: #7C6692; }
+    
+    .answer-box { background: #F3E5F5; padding: 18px; border-radius: 12px; margin-top: 15px; text-align: left; display: none; border-left: 5px solid var(--accent);}
+    .grammar-box { background: #fff; padding: 25px; border-radius: 15px; border: 1px solid #E0BBE4; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.02);}
+    .example-block { background: #FAFAFA; padding: 15px; border-radius: 8px; margin-top: 10px;}
+    
+    .nav-hint { font-size: 0.95rem; color: #999; margin-top: 25px; animation: slideDown 2s infinite; text-align: center; font-weight: bold;}
+    .fade-in { animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1); }
+    
+    @keyframes slideDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .p-purple { background: var(--bg-purple); }
+    .p-pink { background: var(--bg-pink); }
+    .p-mint { background: var(--bg-mint); }
+    .p-yellow { background: var(--bg-yellow); }
+    .p-blue { background: var(--bg-blue); }
+    
+    .blank-line { display: inline-block; min-width: 150px; border-bottom: 2px solid #333; }
+</style>
+</head>
+<body>
+
+<!-- Page 1: Title -->
+<div class="page p-purple">
+    <div class="card text-center">
+        <h1><ruby>文法<rt>ぶんぽう</rt></ruby>と<ruby>翻訳<rt>ほんやく</rt></ruby>の<ruby>特訓<rt>とっくん</rt></ruby></h1>
+        <h2 style="border: none; margin-top: 20px;">〜について / 〜によって / 〜にとって</h2>
+        <div style="background: rgba(255,255,255,0.6); padding: 20px; border-radius: 15px; margin-top: 20px; text-align: left;">
+            <p><strong>【<ruby>目標<rt>もくひょう</rt></ruby>】</strong> 似ている３つの文法をマスターする！</p>
+            <p><strong>【<ruby>形式<rt>けいしき</rt></ruby>】</strong> 穴埋め翻訳（文法部分は提示済み）</p>
+            <p><strong>【ルール】</strong> 各文法ごとに３問ずつ翻訳に挑戦しよう！</p>
+        </div>
+        <div class="nav-hint">▼ 下へスクロールしてスタート ▼</div>
+    </div>
+</div>
+
+<!-- Page 2: Grammar Intro -->
+<div class="page p-mint">
+    <div class="card text-center">
+        <h2>【<ruby>新文法<rt>しんぶんぽう</rt></ruby>】<ruby>対象<rt>たいしょう</rt></ruby>や<ruby>原因<rt>げんいん</rt></ruby>を<ruby>表<rt>あらわ</rt></ruby>す<ruby>表現<rt>ひょうげん</rt></ruby></h2>
+        <p style="margin-top: 15px;">この３つの文法は似ていますが、意味が全然違います：</p>
+        <div class="q-container" style="text-align: left; margin-top: 20px;">
+            <p><strong>🔹 〜について：</strong> 「關於...」。あるテーマや話題について話す・考える時。</p>
+            <p><strong>🔹 〜によって：</strong> 「由於/根據/由...所做」。原因、手段、人による違い、または受け身の動作主。</p>
+            <p><strong>🔹 〜にとって：</strong> 「對...而言」。その人の立場から見た評価や判断。</p>
+        </div>
+        <div class="nav-hint">▼ 次のページから解説と特訓が始まります ▼</div>
+    </div>
+</div>
+
+<!-- Page 3: Teaching について -->
+<div class="page p-yellow">
+    <div class="card">
+        <h2>① 〜について（關於...）</h2>
+        <div class="grammar-box">
+            <h3><ruby>接続<rt>せつぞく</rt></ruby></h3>
+            <p>・<ruby>名詞<rt>めいし</rt></ruby> ＋ について</p>
+            <h3><ruby>意味<rt>いみ</rt></ruby>と<ruby>使<rt>つか</rt></ruby>い<ruby>方<rt>かた</rt></ruby></h3>
+            <p>後ろには「話す、聞く、考える、調べる、書く」などの言葉がよく来ます。</p>
+            <div class="example-block">
+                <p><strong><ruby>例<rt>れい</rt></ruby> 1：</strong><br><ruby>田中<rt>たなか</rt></ruby>さんは<ruby>日本<rt>にほん</rt></ruby>の<ruby>歴史<rt>れきし</rt></ruby><strong>について</strong><ruby>調<rt>しら</rt></ruby>べています。<br>（田中先生正在調查關於日本的歷史。）</p>
+                <hr style="border-top:1px dashed #ccc; margin:10px 0;">
+                <p><strong><ruby>例<rt>れい</rt></ruby> 2：</strong><br>この<ruby>問題<rt>もんだい</rt></ruby><strong>について</strong>、<ruby>鈴木<rt>すずき</rt></ruby>さんと<ruby>話<rt>はな</rt></ruby>し<ruby>合<rt>あ</rt></ruby>いました。<br>（關於這個問題，我和鈴木先生討論過了。）</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page 4: について Practice -->
+<div class="page p-blue">
+    <div class="card">
+        <h2>① 〜について：<ruby>翻訳特訓<rt>ほんやくとっくん</rt></ruby></h2>
+        <p>※ 目標文法は提示されています。残りの部分を日本語に翻訳してください。</p>
+        
+        <div class="q-container">
+            <div class="question">Q1. 鈴木老師在說明關於明天的考試。<br>
+                <ruby>明日<rt>あした</rt></ruby>の<ruby>試験<rt>しけん</rt></ruby><strong>について</strong>、（         ）。
+            </div>
+            <div class="question">Q2. 我寫了關於日本文化的報告。<br>
+                <ruby>日本<rt>にほん</rt></ruby>の<ruby>文化<rt>ぶんか</rt></ruby><strong>について</strong>、（         ）。
+            </div>
+            <div class="question">Q3. 關於這部電影，佐藤先生有什麼想法呢？<br>
+                この<ruby>映画<rt>えいが</rt></ruby><strong>について</strong>、（         ）？
+            </div>
+            <button class="action-btn" onclick="toggleReveal('ans-p4')"><ruby>解答<rt>かいとう</rt></ruby>を<ruby>見<rt>み</rt></ruby>る</button>
+            <div id="ans-p4" class="answer-box fade-in">
+                <p><strong>Q1 解答：</strong> <ruby>鈴木<rt>すずき</rt></ruby><ruby>先生<rt>せんせい</rt></ruby>が<ruby>説明<rt>せつめい</rt></ruby>しています。</p>
+                <p><strong>Q2 解答：</strong> レポートを<ruby>書<rt>か</rt></ruby>きました。</p>
+                <p><strong>Q3 解答：</strong> <ruby>佐藤<rt>さとう</rt></ruby>さんはどう<ruby>思<rt>おも</rt></ruby>いますか。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page 5: Teaching によって -->
+<div class="page p-pink">
+    <div class="card">
+        <h2>② 〜によって（由... / 根據... / 由於...）</h2>
+        <div class="grammar-box">
+            <h3><ruby>接続<rt>せつぞく</rt></ruby></h3>
+            <p>・<ruby>名詞<rt>めいし</rt></ruby> ＋ によって</p>
+            <h3><ruby>意味<rt>いみ</rt></ruby>と<ruby>使<rt>つか</rt></ruby>い<ruby>方<rt>かた</rt></ruby></h3>
+            <p>1. 受け身の動作主（由～所做）<br>2. 違い・多様性（根據～而不同）<br>3. 原因・理由（由於～導致）</p>
+            <div class="example-block">
+                <p><strong><ruby>例<rt>れい</rt></ruby> 1（由）：</strong><br>この<ruby>絵<rt>え</rt></ruby>は<ruby>山田<rt>やまだ</rt></ruby>さん<strong>によって</strong><ruby>描<rt>か</rt></ruby>かれました。<br>（這幅畫是由山田先生畫的。）</p>
+                <hr style="border-top:1px dashed #ccc; margin:10px 0;">
+                <p><strong><ruby>例<rt>れい</rt></ruby> 2（根據）：</strong><br><ruby>人<rt>ひと</rt></ruby><strong>によって</strong><ruby>考<rt>かんが</rt></ruby>え<ruby>方<rt>かた</rt></ruby>が<ruby>違<rt>ちが</rt></ruby>います。<br>（根據人的不同，想法也不一樣。）</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page 6: によって Practice -->
+<div class="page p-purple">
+    <div class="card">
+        <h2>② 〜によって：<ruby>翻訳特訓<rt>ほんやくとっくん</rt></ruby></h2>
+        <p>※ 目標文法は提示されています。残りの部分を日本語に翻訳してください。</p>
+        
+        <div class="q-container">
+            <div class="question">Q1. 這本小說是由高橋先生寫的。<br>
+                この<ruby>小説<rt>しょうせつ</rt></ruby>は<ruby>高橋<rt>たかはし</rt></ruby>さん<strong>によって</strong>、（         ）。
+            </div>
+            <div class="question">Q2. 因為颱風，電車停駛了。<br>
+                <ruby>台風<rt>たいふう</rt></ruby><strong>によって</strong>、（         ）。
+            </div>
+            <div class="question">Q3. 根據國家的不同，文化也不一樣。<br>
+                <ruby>国<rt>くに</rt></ruby><strong>によって</strong>、（         ）。
+            </div>
+            <button class="action-btn" onclick="toggleReveal('ans-p6')"><ruby>解答<rt>かいとう</rt></ruby>を<ruby>見<rt>み</rt></ruby>る</button>
+            <div id="ans-p6" class="answer-box fade-in">
+                <p><strong>Q1 解答：</strong> <ruby>書<rt>か</rt></ruby>かれました。</p>
+                <p><strong>Q2 解答：</strong> <ruby>電車<rt>でんしゃ</rt></ruby>が<ruby>止<rt>と</rt></ruby>まりました。</p>
+                <p><strong>Q3 解答：</strong> <ruby>文化<rt>ぶんか</rt></ruby>が<ruby>違<rt>ちが</rt></ruby>います。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page 7: Teaching にとって -->
+<div class="page p-mint">
+    <div class="card">
+        <h2>③ 〜にとって（對...而言）</h2>
+        <div class="grammar-box">
+            <h3><ruby>接続<rt>せつぞく</rt></ruby></h3>
+            <p>・<ruby>名詞<rt>めいし</rt></ruby>（人や組織） ＋ にとって</p>
+            <h3><ruby>意味<rt>いみ</rt></ruby>と<ruby>使<rt>つか</rt></ruby>い<ruby>方<rt>かた</rt></ruby></h3>
+            <p>その人の立場から見た「評価（難しい、大切だ、必要だ 等）」を言う時に使います。感情の言葉（嬉しい、悲しい）とは一緒に使いません。</p>
+            <div class="example-block">
+                <p><strong><ruby>例<rt>れい</rt></ruby> 1：</strong><br><ruby>私<rt>わたし</rt></ruby><strong>にとって</strong>、<ruby>家族<rt>かぞく</rt></ruby>が<ruby>一番<rt>いちばん</rt></ruby><ruby>大切<rt>たいせつ</rt></ruby>です。<br>（對我來說，家人是最重要的。）</p>
+                <hr style="border-top:1px dashed #ccc; margin:10px 0;">
+                <p><strong><ruby>例<rt>れい</rt></ruby> 2：</strong><br><ruby>外国人<rt>がいこくじん</rt></ruby><strong>にとって</strong>、<ruby>漢字<rt>かんじ</rt></ruby>は<ruby>難<rt>むずか</rt></ruby>しいです。<br>（對外國人而言，漢字很難。）</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page 8: にとって Practice -->
+<div class="page p-yellow">
+    <div class="card">
+        <h2>③ 〜にとって：<ruby>翻訳特訓<rt>ほんやくとっくん</rt></ruby></h2>
+        <p>※ 目標文法は提示されています。残りの部分を日本語に翻訳してください。</p>
+        
+        <div class="q-container">
+            <div class="question">Q1. 對伊藤先生來說，這本書很有用。<br>
+                <ruby>伊藤<rt>いとう</rt></ruby>さん<strong>にとって</strong>、（         ）。
+            </div>
+            <div class="question">Q2. 這張照片對渡邊先生而言是寶物。<br>
+                この<ruby>写真<rt>しゃしん</rt></ruby>は<ruby>渡辺<rt>わたなべ</rt></ruby>さん<strong>にとって</strong>、（         ）。
+            </div>
+            <div class="question">Q3. 對現在的年輕人來說，手機是必需品。<br>
+                <ruby>今<rt>いま</rt></ruby>の<ruby>若者<rt>わかもの</rt></ruby><strong>にとって</strong>、（         ）。
+            </div>
+            <button class="action-btn" onclick="toggleReveal('ans-p8')"><ruby>解答<rt>かいとう</rt></ruby>を<ruby>見<rt>み</rt></ruby>る</button>
+            <div id="ans-p8" class="answer-box fade-in">
+                <p><strong>Q1 解答：</strong> この<ruby>本<rt>ほん</rt></ruby>はとても<ruby>役<rt>やく</rt></ruby>に<ruby>立<rt>た</rt></ruby>ちます。</p>
+                <p><strong>Q2 解答：</strong> <ruby>宝物<rt>たからもの</rt></ruby>です。</p>
+                <p><strong>Q3 解答：</strong> 携帯<ruby>電話<rt>でんわ</rt></ruby>（スマホ）は<ruby>必需品<rt>ひつじゅひん</rt></ruby>です。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page 9: Summary & Ending -->
+<div class="page p-blue">
+    <div class="card text-center">
+        <h1 style="font-size: 2.2rem; margin-bottom: 20px;"><ruby>全問<rt>ぜんもん</rt></ruby>クリア！</h1>
+        <p style="font-size: 1.2rem;">お<ruby>疲<rt>つか</rt></ruby>れ<ruby>様<rt>さま</rt></ruby>でした。</p>
+        
+        <div style="text-align: left; background: #fff; padding: 20px; border-radius: 10px; margin-top: 20px; line-height: 1.8;">
+            <p>☑️ <strong>〜について：</strong> 話題・テーマ</p>
+            <p>☑️ <strong>〜によって：</strong> 原因・手段・人による違い・受け身</p>
+            <p>☑️ <strong>〜にとって：</strong> その人の立場からの評価</p>
+        </div>
+        
+        <div style="background: var(--bg-purple); padding: 20px; border-radius: 15px; margin-top: 30px;">
+            <p style="color: var(--text-main); font-weight: bold; font-size: 1.3rem;">この３つの<ruby>違<rt>ちが</rt></ruby>いを<ruby>覚<rt>おぼ</rt></ruby>えて、<br>もっと<ruby>自然<rt>しぜん</rt></ruby>な<ruby>日本語<rt>にほんご</rt></ruby>を<ruby>話<rt>はな</rt></ruby>しましょう！</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 展開解答的共用邏輯
+    function toggleReveal(elementId) {
+        const el = document.getElementById(elementId);
+        if (el.style.display === 'none' || el.style.display === '') {
+            el.style.display = 'block';
+        } else {
+            el.style.display = 'none';
+        }
+    }
+</script>
+
+</body>
+</html>
